@@ -1,5 +1,5 @@
 
-const API_KEY = "SUA_CHAVE_DE_API";
+const API_KEY = CONFIG.GEMINI_KEY;
 
 const MODELO = "gemini-2.5-flash";
 
