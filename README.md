@@ -3,7 +3,7 @@ Um buscador de livros inteligente que se utiliza de três API's para trazer uma 
 
 # Como utilizar?
 
-Para utilizar o serviço ofericido pelo site será necessário ter chaves de API, sendo a primeira relecionada ao google books e a segunda do gemini, abaixo um guia para a obtenção destas chaves, além de instruções de como utilizá-las. 
+Para utilizar o serviço oferecido pelo site será necessário ter chaves de API, sendo a primeira relecionada ao google books e a segunda do gemini, abaixo um guia para a obtenção destas chaves, além de instruções de como utilizá-las. 
 
 # Gerando as chave do Google Books.
 
