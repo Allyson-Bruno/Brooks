@@ -1,6 +1,4 @@
-// Função responsável por buscar livros na Google Books API
-
-
+let livrosEncontrados = [];
 // Remove caracteres indesejados das descrições
 function limparDescricao(descricao) {
 
@@ -20,14 +18,17 @@ function limparDescricao(descricao) {
     .trim();
 }
 
-async function buscarLivros() {
+async function buscarLivros(genero) {
 
-    //Será alterado.
-    const GENERO = "fantasy";
+    const inicio = Math.floor(Math.random() * 150);
 
-    // URL da API
-    const url =`https://www.googleapis.com/books/v1/volumes?q=subject:${GENERO}&maxResults=10&key=${CONFIG.GOOGLE_BOOKS_KEY}`;
+    // Monta a consulta
+    let consulta = `subject:${genero}`;
 
+    // URL da API.
+    const url =
+`https://www.googleapis.com/books/v1/volumes?q=subject:${genero}&startIndex=${inicio}&maxResults=20&key=${CONFIG.GOOGLE_BOOKS_KEY}`;
+    
     try {
 
         // Faz a requisição
@@ -55,8 +56,19 @@ async function buscarLivros() {
 
             const info = item.volumeInfo;
 
+            // Ignora livros classificados como conteúdo adulto.
+            if (info.maturityRating === "MATURE") {
+                continue;
+            }
+
             // ISBN
             let isbn = "Não informado";
+
+            const titulo = info.title.toLowerCase().trim();
+
+            if (titulo.includes("the plague of fantasies") || titulo.includes("observing the erotic imagination")) {
+                continue;
+            }
 
             if (info.industryIdentifiers) {
 
@@ -71,6 +83,23 @@ async function buscarLivros() {
                 isbn = isbn13?.identifier || isbn10?.identifier || "Não informado";
             }
 
+            //Definindo a capa do livro:
+
+            let capa;
+
+            if (isbn !== "Não informado") {
+
+                capa = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+
+            } else {
+
+                capa =
+                info.imageLinks?.large ||
+                info.imageLinks?.medium ||
+                info.imageLinks?.thumbnail ||
+                "./src/assets/imagens/sem-capa.png";
+            }
+
             // Objeto que representa um livro
             const livro = {
 
@@ -82,7 +111,7 @@ async function buscarLivros() {
 
                 isbn: isbn,
 
-                capa: info.imageLinks?.thumbnail || "./src/assets/imagens/sem-capa.png",
+                capa: capa,
 
                 editora: info.publisher || "Editora não informada",
 
@@ -100,9 +129,6 @@ async function buscarLivros() {
             livros.push(livro);
         }
 
-        // Mostra todos os livros no console
-        console.log(livros);
-
         // Retorna o vetor
         return livros;
 
@@ -111,12 +137,124 @@ async function buscarLivros() {
         console.error("Erro ao buscar livros:", erro);
 
         return [];
-
     }
 
 }
 
-    async function analisarLivro(livro) {
+function renderizarLivros() {
+
+    const listaLivros = document.querySelector("#listaLivros");
+
+    // Limpa a lista antes de inserir novos livros
+    listaLivros.innerHTML = "";
+
+    // Mostra apenas os 6 primeiros livros
+    livrosEncontrados.slice(0,8).forEach((livro, indice)=>{ 
+
+        const card = document.createElement("div");
+
+        card.className = "col-6 col-md-4 col-lg-3 mb-4 d-flex justify-content-center"; 
+
+        //Cada card sabe que livro representa.
+        card.dataset.indice = indice;
+
+        //Cada card necessita ter um click.
+        card.onclick = async () => {
+
+            card.style.pointerEvents = "none";
+
+            if (!livro.analise) {
+                await analisarLivro(livro);
+            }
+
+            card.style.pointerEvents = "auto";
+
+            mostrarDetalhes(livro);
+        };
+
+        //Já evita espaços em branco.
+        card.innerHTML = `
+            <div class="card livro-card h-100">
+
+                <img
+                    src="${livro.capa}"
+                    class="card-img-top"
+                    alt="${livro.titulo}"
+                    onerror="this.src='https://placehold.co/300x450?text=Capa+Indisponível'">
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        ${livro.titulo}
+                    </h5>
+
+                    <p class="card-text">
+                        ${livro.autor}
+                    </p>
+
+                </div>
+
+            </div>
+        `;
+
+        listaLivros.appendChild(card);
+
+    });
+}
+
+function mostrarDetalhes(livro) {
+
+    document.querySelector("#detalhes").classList.remove("d-none");
+
+    document.querySelector("#detalheCapa").src = livro.capa;
+
+    document.querySelector("#detalheTitulo").textContent = livro.titulo;
+
+    document.querySelector("#detalheAutor").textContent = livro.autor;
+
+    document.querySelector("#detalheEditora").textContent = livro.editora;
+
+    document.querySelector("#detalhePaginas").textContent = livro.paginas;
+
+    document.querySelector("#detalheCategoria").textContent = livro.categorias;
+
+    if (livro.analise) {
+
+        document.querySelector("#detalheResumo").textContent =
+            livro.analise.resumo;
+
+        document.querySelector("#detalheLeitor").textContent =
+            livro.analise.tipoLeitor;
+
+        document.querySelector("#detalheDificuldade").textContent =
+            livro.analise.dificuldade;
+
+        document.querySelector("#detalheCuriosidade").textContent =
+            livro.analise.curiosidade;
+
+        const listaTemas =
+            document.querySelector("#detalheTemas");
+
+        listaTemas.innerHTML = "";
+
+        livro.analise.temas.forEach((tema)=>{
+
+            const li = document.createElement("li");
+
+            li.textContent = tema;
+
+            listaTemas.appendChild(li);
+
+        });
+    }
+
+        document.querySelector("#detalhes").scrollIntoView({
+        behavior:"smooth"
+
+    });
+}
+
+async function analisarLivro(livro) {
 
     const prompt = `
        
@@ -162,34 +300,78 @@ async function buscarLivros() {
 
     const resposta = await chamarGemini(prompt);
 
+    if (!resposta) {
+
+        livro.analise = {
+
+            resumo: "Não foi possível gerar a análise.",
+
+            tipoLeitor: "Indisponível.",
+
+            dificuldade: "Indisponível.",
+
+            temas: [],
+
+            curiosidade: "A API Gemini não respondeu."
+        };
+
+        return livro;
+    }
+
     try {
-
         livro.analise = JSON.parse(resposta);
-
     } catch (erro) {
 
         console.error("Erro ao converter resposta do Gemini para JSON.", erro);
 
-        livro.analise = null;
+        livro.analise = {
 
+            resumo: "Não foi possível gerar o resumo no momento.",
+            tipoLeitor: "Indisponível.",
+            dificuldade: "Indisponível.",
+            temas: [],
+            curiosidade: "Tente novamente em alguns instantes."
+        };
+        
     }
 
     return livro;
-
 }
 
-// Teste da função
-async function iniciar() {
 
-    const livros = await buscarLivros();
+async function iniciar(genero) {
 
-    if (livros.length === 0) {
+    livrosEncontrados = await buscarLivros(genero);
+
+    if(livrosEncontrados.length === 0){
         return;
     }
 
-    const livroCompleto = await analisarLivro(livros[1]);
+    renderizarLivros();
 
-    console.log(livroCompleto);
+    //Desce a tela após os livros serem renderizados.
+    document.querySelector("#livros").scrollIntoView({
+        behavior: "smooth"
+    });
 }
 
-iniciar();
+const btnBuscar = document.querySelector("#btnBuscar");
+
+    btnBuscar.onclick = async () => {
+
+    CONFIG.GOOGLE_BOOKS_KEY =
+    document.querySelector("#googleKey").value.trim();
+
+    CONFIG.GEMINI_KEY =
+    document.querySelector("#geminiKey").value.trim();
+
+    if (CONFIG.GOOGLE_BOOKS_KEY === "" || CONFIG.GEMINI_KEY === "") {
+        alert("Informe as duas chaves da API.");
+        return;
+    }
+    
+    // pega o gênero
+    const genero = document.querySelector("#genero").value;
+
+    await iniciar(genero);
+};

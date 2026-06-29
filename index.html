@@ -6,22 +6,327 @@
     <title>Brooks</title>
     <link rel="stylesheet" href="./src/css/style.css">
     <link rel="shortcut icon" href="./src/assets/favicon/favicon.ico" type="image/x-icon">
+
+    <!--Inserido o bootsrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!--Link do icone-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
 </head>
 <body>
 
-    <!-- Header-->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top border-bottom border-secondary">
+            <div class="container">
+                <a class="navbar-brand logo fw-bold" href="#inicio">
+                    <i class="bi-book-half"></i>
+                    Brooks
+                </a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <main>
+                <div class="collapse navbar-collapse justify-content-center" id="menu">
+                    <ul class="navbar-nav gap-lg-4">
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#inicio">Início</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="#livros">Livros</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="#sobre">Sobre</a>
+                        </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="#doc">Documentação</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <section id="inicio" class="container, section">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h1 class="display-3 fw-bold logo">
+                    <i class="bi bi-book-half"></i>
+                    Brooks
+                </h1>
+
+                <h2 class="mt-3">
+                    Seu buscador de livros!
+                </h2>
+
+                <p class="lead mt-3 mb-5">
+                    Descubra novos livros através da Google Books API
+                    junto com informações inteligentes fornecidas pelo Gemini.
+                </p>
+
+                <form id="formBusca" class="mx-auto">
+                    <div class="mb-3">
+                        <label for="googleKey">Chave da Google Books API</label>
+                        <input type="password" id="googleKey" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="geminiKey">Chave da Gemini API</label>
+                        <input type="password" id="geminiKey" class="form-control">
+                    </div>
+
+                    <div class="mb-4">
+
+                        <select
+                            id="genero"
+                            class="form-select">
+
+                            <option selected disabled>
+                                Escolha um gênero
+                            </option>
+
+                            <option value="fantasy">
+                                Fantasia
+                            </option>
+
+                            <option value="science fiction">
+                                Ficção Científica
+                            </option>
+
+                            <option value="history">
+                                História
+                            </option>
+
+                            <option value="adventure">
+                                Aventura
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <button
+                        id="btnBuscar"
+                        type="button"
+                        class="btn btn-warning btn-lg px-5">
+                        <i class="bi bi-search"></i>
+
+                        Buscar Livros
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="livros" class="section">
+        <div class="container">
+            <div class="text-center mb-5">
+
+                <h2 class="fw-bold">
+                    Livros Recomendados
+                </h2>
+
+                <p class="text-secondary">
+                    Os livros encontrados aparecerão abaixo.
+                </p>
+
+            </div>
+
+            <div
+                id="listaLivros"
+                class="row g-4 justify-content-center">
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="detalhes" class="section d-none">
+
+        <div class="container">
+
+            <h2 class="text-center mb-5">
+                Detalhes do Livro
+            </h2>
+
+            <div class="row">
+                <div class="col-lg-4 text-center">
+
+                <img id="detalheCapa" class="img-fluid rounded shadow">
+
+            </div>
+
+            <div class="col-lg-8">
+
+                <h2 id="detalheTitulo"></h2>
+
+                <p>
+                    <strong>Autor:</strong>
+                    <span id="detalheAutor"></span>
+                </p>
+
+                <p>
+                    <strong>Editora:</strong>
+                    <span id="detalheEditora"></span>
+                </p>
+
+                <p>
+                    <strong>Páginas:</strong>
+                    <span id="detalhePaginas"></span>
+                </p>
+
+                <p>
+                    <strong>Categoria:</strong>
+                    <span id="detalheCategoria"></span>
+                </p>
+
+                <hr>
+
+                <h4>Resumo</h4>
+
+                <p id="detalheResumo"></p>
+
+                <h4>Leitor recomendado</h4>
+
+                <p id="detalheLeitor"></p>
+
+                <h4>Dificuldade</h4>
+
+                <p id="detalheDificuldade"></p>
+
+                <h4>Temas</h4>
+
+                <ul id="detalheTemas"></ul>
+
+                <h4>Curiosidade</h4>
+
+                <p id="detalheCuriosidade"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </section>
+
+    <section id="sobre" class="section">
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-8 text-center">
+
+                    <h2 class="mb-4">
+                        Sobre o Brooks
+                    </h2>
+
+                    <p class="lead">
+
+                    O Brooks é um buscador inteligente de livros que integra a
+                    Google Books API e a API Gemini para oferecer recomendações
+                    personalizadas de leitura.
+
+                    </p>
+
+                    <p>
+
+                    O projeto foi desenvolvido com o objetivo de demonstrar a
+                    integração entre APIs utilizando JavaScript, HTML,
+                    CSS e Bootstrap. Além de apresentar livros de diferentes
+                    gêneros, a aplicação gera um resumo e indica o perfil de leitor recomendado,
+                    apresentar os principais temas abordados e fornecer uma
+                    curiosidade sobre a obra.
+
+                    </p>
+
+                    <p>
+
+                    O principal propósito do Brooks é incentivar a descoberta de
+                    novos livros ou velhos livros, de forma intuitiva e acessível para
+                    qualquer leitor.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+</section>
+
+<section id="doc" class="section">
+    <div class="container text-center">
+
+        <h2 class="mb-4">
+            Documentação
+        </h2>
+
+        <p>
+            Todo o código-fonte, documentação e instruções de execução
+            estão disponíveis no repositório do projeto no GitHub no arquivo README.md
+        </p>
+
+        <a href="https://github.com/Allyson-Bruno/Brooks" target="_blank" class="btn btn-warning mt-3"> Acessar Repositório </a>
+    
+    </div>
+
+</section>
+
+        <footer class="bg-dark text-light py-4">
+            <div class="container">
+                <div class="row gy-4 text-center">
+    
+                <div class="col-md-6 text-center">
+                    <h5>Sobre o site</h5>
+                    <p class="text-secondary mb-1">
+                        Desenvolvido com Css, Js e Bootstrap 5.
+                    </p>
+                    <p class="text-secondary mb-0">
+                        Brooks © 2026 - Allyson Bruno.
+                    </p>
+                </div>
+    
+                <div class="col-md-6 text-center">
+                    <h5>Conecte-se comigo.</h5>
+    
+                    <div class="d-flex justify-content-center gap-3 mb-3">
+                        <a href="https://github.com/Allyson-Bruno" target="_blank">
+                            <img src="./src/assets/imagens/github-mark-white.png" alt="GitHub" width="40">
+                        </a>
+    
+                        <a href="https://www.linkedin.com/in/allyson-bruno-0563a7392/" target="_blank">
+                            <img src="./src/assets/imagens/icons8-linkedin-50.png" alt="LinkedIn" width="40">
+                        </a>
+                    </div>
+    
+                    <div class="d-flex align-items-center justify-content-center gap-2">
+                        <img src="./src/assets/imagens/icons8-email-50.png" alt="Email" width="24">
+                        <span>allbruno2622@gmail.com</span>
+                    </div>
+                </div>
+    
+            </div>
+        </div>
+    </footer>
 
     </main>
-
-
-
-    <!-- Footer-->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
