@@ -1,4 +1,4 @@
-# Brooks
+# Brooks 0.1
 Um buscador de livros inteligente que se utiliza de três API's para trazer uma lista de livros tendo como o base o gênero e ano a ser buscado. A partir da lista será gerado um resumo contendo detalhes do livro e uma curiosidade trazidas pelo gemini!
 
 # Como utilizar?
@@ -24,6 +24,17 @@ https://aistudio.google.com/app/u/4/api-keys
 Um projeto default será gerado, clicando no nome acima de "Default Gemini API Key", sem seguida no menu pop-up basta cópiar a chave no campu API KEY e colocar no input referente ao site.
 
 Com as chaves geradas, basta aproveitar e realizar as buscas aos livros!
+
+# O futuro.
+
+Muito do que gostaria de adicionar na versão base Brooks, infelizmente teve que ser cortado devido ao tempo. Portanto, para o Brooks 0.2 tenho essses objetivos em mente:
+
+1. Adicionar um novo parâmetro para a pesquisa: ano. Permitindo que o usuário direcione melhor o periódo dos livros pelo qual ele tem interesse.
+2. Uma melhora no desing do site, como foco na parte de detalhes traziadas pelo livro.
+3. Permitir a busca específica por um único livro, além de permitir que pesquise livros correlatos a partir desse mesmo.
+4. Forncer links com sites disponíveis para os livros que o usuário deseja comprar como Amazon, mercado livre e shoope.
+
+No geral são essas ideias no momento, e espero um dia no futuro realizar uma implementção completa do Brooks!
 
 # Observação final.
 
