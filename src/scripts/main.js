@@ -20,10 +20,7 @@ function limparDescricao(descricao) {
 
 async function buscarLivros(genero) {
 
-    const inicio = Math.floor(Math.random() * 150);
-
-    // Monta a consulta
-    let consulta = `subject:${genero}`;
+    const inicio = Math.floor(Math.random() * 100);
 
     // URL da API.
     const url =
@@ -205,17 +202,11 @@ function renderizarLivros() {
 function mostrarDetalhes(livro) {
 
     document.querySelector("#detalhes").classList.remove("d-none");
-
     document.querySelector("#detalheCapa").src = livro.capa;
-
     document.querySelector("#detalheTitulo").textContent = livro.titulo;
-
     document.querySelector("#detalheAutor").textContent = livro.autor;
-
     document.querySelector("#detalheEditora").textContent = livro.editora;
-
     document.querySelector("#detalhePaginas").textContent = livro.paginas;
-
     document.querySelector("#detalheCategoria").textContent = livro.categorias;
 
     if (livro.analise) {
@@ -287,7 +278,7 @@ async function analisarLivro(livro) {
         Não utilize \`\`\`json.
         Não escreva nenhuma explicação.
 
-        Retorne exatamente neste formato:
+        Retorne neste formato:
 
         {
         "resumo": "",

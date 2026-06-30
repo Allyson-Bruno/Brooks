@@ -30,12 +30,10 @@ img{
     background-color:rgba(239, 234, 234, 0.1);
     border-radius: 6px;
     transform: scale(1.02);
-   
 }
 
 .nav-link {
     transition: all 0.3s ease;
-    transition:.3s;
     padding-inline:12px;
 }
 
@@ -47,19 +45,13 @@ img{
 
 /*Fim geral sessões*/
 
-
-
-
-/*Sessão de incío.*/
+/*Sessão de início.*/
 
 #inicio{
-
     min-height: 80vh; /* ocupa toda a altura da tela */
     display: flex;
     align-items: center;      /* centraliza na vertical */
     justify-content: center;  /* centraliza na horizontal */
-
-
 }
 
 #inicio .row{
@@ -67,157 +59,98 @@ img{
 }
 
 #inicio .col-lg-8{
-
     max-width:700px;
-
 }
 
 #inicio h2{
-
     font-weight:300;
 }
 
 #inicio p{
-
     color:#cfcfcf;
-
     max-width:700px;
-
     margin:auto;
-
 }
 
 #formBusca{
-
     max-width:600px;
     width:100%;
 }
 
 .form-control,
 .form-select{
-
    background:#2a2b2f !important;
-
-    color:white !important;
-
-    border:1px solid #555 !important;
-
-    transition:.3s;
-
-}
-
-.form-control::placeholder{
-
-    color:#bfbfbf !important;
+   color:white !important;
+   border:1px solid #555 !important;
+   transition:.3s;
 
 }
 
 .form-control:focus,
 .form-select:focus{
-
     border-color:#F4B400 !important;
     box-shadow:0 0 10px rgba(244,180,0,.35);
-    
-
 }
 
 .btn-warning{
-
     font-weight:bold;
     padding:12px 35px;
     transition:.3s;
-
 }
 
 /*Fim da sessão de início*/
 
-
 /* Sessão Livros */
 
 #livros h2{
-
     font-weight:700;
-
 }
 
 #listaLivros{
-
     min-height:300px;
-
-}
-
-.livro-card{
-
-
-    width: 210px;
-
-    background:#2a2b2f;
-
-    border:none;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
-    transition:.3s;
-
-}
-
-#listaLivros{
     max-width: 900px;
     margin: 0 auto;
 }
 
-.livro-card:hover{
+.livro-card{
+    width: 210px;
+    background:#2a2b2f;
+    border:none;
+    border-radius:12px;
+    overflow:hidden;
+    transition:.3s;
+}
 
+.livro-card:hover{
     transform:translateY(-8px);
     box-shadow:0 10px 25px rgba(0,0,0,.45);
-
 }
 
 /* Centraliza quando não existir imagem*/
 .card-img-top{
-
-    width:120%;
-
+    width:100%;
     height:260px;
-
     object-fit:cover;
-
     object-position:center;
-
 }
 
 .card-body{
-
     display:flex;
-
     flex-direction:column;
-
     justify-content:space-between;
-
     padding:.8rem;
-
 }
 
 .card-title{
-
     font-size:1rem;
-
     font-weight:600;
-
     min-height:50px;
-
 }
 
 .card-text{
-
     color:#bcbcbc;
-
     font-size:.9rem;
-
     margin-bottom:0;
-
 }
 
 /*Fim da sessão de livros*/
@@ -225,10 +158,8 @@ img{
 /*Sessão sobre*/
 
 #sobre p{
-
     color:#d1d1d1;
     line-height:1.8;
-
 }
 
 /* Fim da sessão sobre*/
@@ -236,16 +167,12 @@ img{
 /*Sessão da documentação*/
 
 #doc{
-
     background:#1d1e20;
 }
 
 #doc p{
-
     color:#cfcfcf;
-
 }
-
 
 
 /*Fim da sessão de documentção*/
