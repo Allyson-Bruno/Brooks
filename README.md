@@ -32,7 +32,7 @@ Muito do que gostaria de adicionar na versão base Brooks, infelizmente teve que
 1. Adicionar um novo parâmetro para a pesquisa: ano. Permitindo que o usuário direcione melhor o periódo dos livros pelo qual ele tem interesse.
 2. Uma melhora no desing do site, como foco na parte de detalhes traziadas pelo livro.
 3. Permitir a busca específica por um único livro, além de permitir que pesquise livros correlatos a partir desse mesmo.
-4. Forncer links com sites disponíveis para os livros que o usuário deseja comprar como Amazon, mercado livre e shoope.
+4. Fornecer links com sites disponíveis para os livros que o usuário deseja comprar como Amazon, mercado livre e shoope.
 
 No geral são essas ideias no momento, e espero um dia no futuro realizar uma implementção completa do Brooks!
 
