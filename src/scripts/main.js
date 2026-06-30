@@ -6,15 +6,14 @@ function limparDescricao(descricao) {
         return "Descrição indisponível.";
     }
 
-    return descricao
-
-    // Remove sequências de zeros no início
-    .replace(/^\.?0+/, "")
-
-    // Remove espaços repetidos
-    .replace(/\s+/g, " ")
-
+    //Expressões Regulares para limpar e organizar o conteúdo. Como:
+    // Remove sequências de zeros no início.
+    // Remove espaços repetidos.
     // Remove espaços no começo e no final
+
+    return descricao
+    .replace(/^\.?0+/, "")
+    .replace(/\s+/g, " ")
     .trim();
 }
 
@@ -191,7 +190,7 @@ function renderizarLivros() {
 
 function mostrarDetalhes(livro) {
 
-    //Entender o motivo desse d-none.
+    //Esconde o modal até o clique do usuário.
     document.querySelector("#detalhes").classList.remove("d-none");
     document.querySelector("#detalheCapa").src = livro.capa;
     document.querySelector("#detalheTitulo").textContent = livro.titulo;
@@ -229,10 +228,8 @@ function mostrarDetalhes(livro) {
 
         });
     }
-
         document.querySelector("#detalhes").scrollIntoView({
         behavior:"smooth"
-
     });
 }
 
