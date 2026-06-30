@@ -25,11 +25,12 @@ O funcionamento da aplicação ocorre da seguinte maneira:
 6. Os livros são exibidos em formato de cards na página principal.
 7. Ao clicar em um card, a aplicação envia as informações do livro para a Gemini API.
 8. O Gemini retorna uma resposta em formato JSON contendo:
-  *resumo.
-  *leitor recomendado.
-  *dificuldade de leitura.
-  *principais temas.
-  *curiosidade sobre a obra.
+   
+*  resumo.
+*  leitor recomendado.
+*  dificuldade de leitura.
+*  principais temas.
+*  curiosidade sobre a obra.
 
 Essas informações são exibidas na seção de detalhes do livro.
 
@@ -37,8 +38,8 @@ Essas informações são exibidas na seção de detalhes do livro.
 
 Para utilizar o Brooks será necessário possuir duas chaves de API:
 
-*Google Books API.
-*Gemini API.
+* Google Books API.
+* Gemini API.
 
 Abaixo um guia para a obtenção destas chaves, além de instruções de uso de ambas.
 
