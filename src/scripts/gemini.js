@@ -1,6 +1,3 @@
-
-const API_KEY = CONFIG.GEMINI_KEY;
-
 const MODELO = "gemini-2.5-flash";
 
 const URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODELO}:generateContent`;
@@ -27,7 +24,7 @@ headers: {
 
 "Content-Type": "application/json",
 
-"x-goog-api-key": API_KEY
+"x-goog-api-key": CONFIG.GEMINI_KEY
 
 },
 

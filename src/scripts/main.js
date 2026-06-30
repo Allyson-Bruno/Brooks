@@ -63,6 +63,7 @@ async function buscarLivros(genero) {
 
             const titulo = info.title.toLowerCase().trim();
 
+            //Livros banidos.
             if (titulo.includes("the plague of fantasies") || titulo.includes("observing the erotic imagination")) {
                 continue;
             }
@@ -81,23 +82,19 @@ async function buscarLivros(genero) {
             }
 
             //Definindo a capa do livro:
-
             let capa;
 
             if (isbn !== "Não informado") {
-
+                //Uso da API open library para trazer capaz com melhor resolução.
                 capa = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
-
             } else {
-
                 capa =
                 info.imageLinks?.large ||
                 info.imageLinks?.medium ||
-                info.imageLinks?.thumbnail ||
-                "./src/assets/imagens/sem-capa.png";
+                info.imageLinks?.thumbnail;
             }
 
-            // Objeto que representa um livro
+            //Criando o objeto livro:
             const livro = {
 
                 titulo: info.title || "Título não informado",
@@ -119,7 +116,6 @@ async function buscarLivros(genero) {
                 categorias: info.categories?.join(", ") || "Categoria não informada",
 
                 idioma: info.language || "Não informado"
-
             };
 
             // Adiciona o livro ao vetor
@@ -138,6 +134,7 @@ async function buscarLivros(genero) {
 
 }
 
+//Pega os livros buscados pela API e transforma eles em cards que apareceram na tela.
 function renderizarLivros() {
 
     const listaLivros = document.querySelector("#listaLivros");
@@ -145,7 +142,7 @@ function renderizarLivros() {
     // Limpa a lista antes de inserir novos livros
     listaLivros.innerHTML = "";
 
-    // Mostra apenas os 6 primeiros livros
+    // Mostra apenas os 8 primeiros livros
     livrosEncontrados.slice(0,8).forEach((livro, indice)=>{ 
 
         const card = document.createElement("div");
@@ -155,7 +152,7 @@ function renderizarLivros() {
         //Cada card sabe que livro representa.
         card.dataset.indice = indice;
 
-        //Cada card necessita ter um click.
+        //Cada card necessita ter um click para exibir as informações finais do livro.
         card.onclick = async () => {
 
             card.style.pointerEvents = "none";
@@ -169,16 +166,11 @@ function renderizarLivros() {
             mostrarDetalhes(livro);
         };
 
-        //Já evita espaços em branco.
         card.innerHTML = `
             <div class="card livro-card h-100">
-
-                <img
-                    src="${livro.capa}"
-                    class="card-img-top"
-                    alt="${livro.titulo}"
-                    onerror="this.src='https://placehold.co/300x450?text=Capa+Indisponível'">
-
+                
+                <img src="${livro.capa}" class="card-img-top" alt="${livro.titulo}" 
+                onerror="this.src='https://placehold.co/300x450?text=Capa+Indisponível'">
                 <div class="card-body">
 
                     <h5 class="card-title">
@@ -190,17 +182,16 @@ function renderizarLivros() {
                     </p>
 
                 </div>
-
             </div>
         `;
 
         listaLivros.appendChild(card);
-
     });
 }
 
 function mostrarDetalhes(livro) {
 
+    //Entender o motivo desse d-none.
     document.querySelector("#detalhes").classList.remove("d-none");
     document.querySelector("#detalheCapa").src = livro.capa;
     document.querySelector("#detalheTitulo").textContent = livro.titulo;
