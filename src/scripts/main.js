@@ -188,6 +188,7 @@ function renderizarLivros() {
     });
 }
 
+//Quando o usuário clica em um card de livro, chama essa função que remove o d-none. Exibindo a sessão.
 function mostrarDetalhes(livro) {
 
     //Esconde o modal até o clique do usuário.
@@ -353,4 +354,17 @@ const btnBuscar = document.querySelector("#btnBuscar");
     const genero = document.querySelector("#genero").value;
 
     await iniciar(genero);
+};
+
+// Intercepta o clique no link "Detalhes" da Navbar
+const linkDetalhesNav = document.querySelector('a[href="#detalhes"]');
+
+linkDetalhesNav.onclick = (evento) => {
+    const secaoDetalhes = document.querySelector("#detalhes");
+    
+    // Se a seção ainda está escondida, significa que nenhum livro foi clicado.
+    if (secaoDetalhes.classList.contains("d-none")) {
+        evento.preventDefault(); // Impede o link de tentar rolar a tela para o nada.
+        alert("Por favor, busque e clique em um livro primeiro para ver os detalhes!");
+    }
 };
