@@ -12,13 +12,12 @@ body {
     color: white !important;
 }
 
-
-
 /*Para a navBar*/
 .navbar {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-    z-index: 1000 !important;
+    z-index: 1000 !important; /* Garante que a navbar fique sempre na camada da frente de qualquer outro elemento ao rolar a tela */
 }
+
 
 .nav-link:hover {
     background-color:rgba(239, 234, 234, 0.1);
@@ -28,35 +27,36 @@ body {
 
 .nav-link {
     transition: all 0.3s ease;
-    padding-inline:12px;
+    padding-inline:12px; /* Adiciona espaçamento interno apenas nas laterais dos links (esquerda e direita) */
 }
 
 /*Geral sessões*/
 
 .section{
     padding:70px 0;
+    scroll-margin-top: 50px; /*Respiro para o nav-bar não cobrir o título da sessão*/
 }
 
 /*Fim geral sessões*/
 
 /*Sessão de início.*/
 #inicio{
-    min-height: 80vh; /* ocupa toda a altura da tela */
+    min-height: 80vh; /* Define que a seção ocupará no mínimo 80% da altura da tela do dispositivo */
     display: flex;
     align-items: center;      /* centraliza na vertical */
     justify-content: center;  /* centraliza na horizontal */
 }
 
 #inicio .row{
-    justify-content:center;
+    justify-content:center; /* Centraliza a linha do grid do Bootstrap */
 }
 
 #inicio .col-lg-8{
-    max-width:700px;
+    max-width:700px; /* Limita a largura máxima do bloco de texto para melhorar a leitura */
 }
 
 #inicio h2{
-    font-weight:300;
+    font-weight:300; /* Deixa o subtítulo com uma fonte mais fina, dando destaque para o título principal */
 }
 
 #inicio p{
@@ -67,9 +67,10 @@ body {
 
 #formBusca{
     max-width:600px;
-    width:100%;
+    width:100%; /* Permite que ele seja responsivo e encolha em telas menores */
 }
 
+/* Customização das caixas de texto (inputs) e seletores*/
 .form-control,
 .form-select{
    background:#2a2b2f !important;
@@ -79,12 +80,14 @@ body {
 
 }
 
+/* Configuração de quando o usuário clica no campo para digitar.*/
 .form-control:focus,
 .form-select:focus{
     border-color:#F4B400 !important;
     box-shadow:0 0 10px rgba(244,180,0,.35);
 }
 
+/* Customização do botão amarelo do Bootstrap */
 .btn-warning{
     font-weight:bold;
     padding:12px 35px;
@@ -105,6 +108,7 @@ body {
     margin: 0 auto;
 }
 
+/* Estilização individual de cada cartão de livro */
 .livro-card{
     width: 210px;
     background:#2a2b2f;
@@ -114,12 +118,13 @@ body {
     transition:.3s;
 }
 
+/* Efeito de flutuar ao passar o mouse em cima do card */
 .livro-card:hover{
     transform:translateY(-8px);
     box-shadow:0 10px 25px rgba(0,0,0,.45);
 }
 
-/* Centraliza quando não existir imagem*/
+/* Força a padronização e enquadramento das capas dos livros */
 .card-img-top{
     width:100%;
     height:260px;
@@ -127,12 +132,14 @@ body {
     object-position:center;
 }
 
+/* Alinhamento dos textos internos do card */
 .card-body{
     display:flex;
     flex-direction:column;
     justify-content:space-between;
     padding:.8rem;
 }
+
 
 .card-title{
     font-size:1rem;
@@ -166,6 +173,5 @@ body {
 #doc p{
     color:#cfcfcf;
 }
-
 
 /*Fim da sessão de documentção*/
